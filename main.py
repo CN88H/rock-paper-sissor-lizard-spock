@@ -9,6 +9,7 @@
 # (10 points): As a player, I want the game of RPSLS to be at minimum a “best of three” to decide a winner.
 # (10 points): As a player, I want the option of a single player (human vs AI) or a multiplayer (human vs human) game.
 
-# from game import Play_game
+from game import Play_game
 
+play_game = Play_game()
 
