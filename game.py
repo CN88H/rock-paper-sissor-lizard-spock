@@ -42,13 +42,8 @@ class Play_game:
 
     def human_vs_ai(self):
         
-        print("1 = rock")
-        print("2 = paper")
-        print("3 = sissor")
-        print("4 = lizard")
-        print("5 = spock")
 
-        gestures = [Gesture('Rock', 'Scissor', 'Lizard'), 
+        gestures = [Gesture('Rock', 'Sissor', 'Lizard'), 
             Gesture('Paper', "Rock", 'Spock'),
             Gesture('Sissor', 'Paper', 'Lizard'),
             Gesture('Lizard', 'Spock', 'Paper'),
@@ -59,6 +54,15 @@ class Play_game:
 
 
         while self.human.score <= 2 or self.ai.score <= 2:
+            print("")
+            print("This is the choices.")
+            print("1 = rock")
+            print("2 = paper")
+            print("3 = sissor")
+            print("4 = lizard")
+            print("5 = spock")
+            print("")
+
             human_choice = gestures[int(input("Select your gesture: ")) - 1] 
             print(f"You've choosen {human_choice.name}")
 
@@ -68,14 +72,20 @@ class Play_game:
             
             if human_choice == ai_choice:
                 print("It's a tie! Try again.")
+                print("")
+                print(f"Player 1 score is {self.human.score}, and CPU score is {self.ai.score}.")
             elif ai_choice.name == human_choice.defeats_gesture2 or ai_choice.name == human_choice.defeats_gesture1:
                 print("You win this hand.")
+                print("")
                 self.human.score += 1
+                print(f"Player 1 score is {self.human.score}, and CPU score is {self.ai.score}.")
                 if self.human.score == 2:
                     self.display_winner()
             elif human_choice.name == ai_choice.defeats_gesture1 or human_choice.name == ai_choice.defeats_gesture2:
                 print('You lost this hand.')
+                print("")
                 self.ai.score += 1
+                print(f"Player 1 score is {self.human.score}, and CPU score is {self.ai.score}.")
                 if self.ai.score == 2:
                     self.display_winner()
             else:
@@ -86,55 +96,74 @@ class Play_game:
 
     def human_vs_human(self):
 
-        print("1 = rock")
-        print("2 = paper")
-        print("3 = sissor")
-        print("4 = lizard")
-        print("5 = spock")
-
-        gestures = [Gesture('Rock', 'Scissor', 'Lizard'), 
+        gestures = [Gesture('Rock', 'Sissor', 'Lizard'), 
             Gesture('Paper', "Rock", 'Spock'),
             Gesture('Sissor', 'Paper', 'Lizard'),
             Gesture('Lizard', 'Spock', 'Paper'),
             Gesture('Spock', 'Sissor', 'Rock')]
 
         while self.human.score == 2 or self.human_two.score == 2:
-                human_choice = gestures[int(input("Select your gesture: ")) - 1] 
-                print(f"Player 1 chose {human_choice.name}")
+            print("")
+            print("This is the choices.")
+            print("1 = rock")
+            print("2 = paper")
+            print("3 = sissor")
+            print("4 = lizard")
+            print("5 = spock")
+            print("")
 
-                human_two_choice = gestures[int(input("Select your gesture: ")) - 1]
-                print(f"Player 2 Chose {human_two_choice.name}")
+            human_choice = gestures[int(input("Select your gesture: ")) - 1] 
+            print(f"Player 1 chose {human_choice.name}")
 
-                if human_choice == human_two_choice:
-                    print("It's a tie! Try again.")
-                elif human_two_choice.name == human_choice.defeats_gesture1 or human_two_choice.name == human_choice.defeats_gesture2:
-                    print("Player 1 wins this hand.")
-                    self.human.score += 1
-                elif human_choice.name == human_two_choice.defeats_gesture1 or human_choice.name == human_two_choice.defeats_gesture2:
-                    print('Player 2 wins this hand.')
-                    self.ai.score += 1
-                else:
-                    print('Please pick from 1-5.')
+            human_two_choice = gestures[int(input("Select your gesture: ")) - 1]
+            print(f"Player 2 Chose {human_two_choice.name}")
+
+            if human_choice == human_two_choice:
+                print("It's a tie! Try again.")
+                print("")
+                print(f"Player 1 score is {self.human.score}, and CPU score is {self.human_two.score}.")
+            elif human_two_choice.name == human_choice.defeats_gesture1 or human_two_choice.name == human_choice.defeats_gesture2:
+                print("Player 1 wins this hand.")
+                print("")
+                self.human.score += 1
+                print(f"Player 1 score is {self.human.score}, and CPU score is {self.ai.score}.")
+                if self.human.score == 2:
+                    self.display_winner()
+            elif human_choice.name == human_two_choice.defeats_gesture1 or human_choice.name == human_two_choice.defeats_gesture2:
+                print('Player 2 wins this hand.')
+                print("")
+                self.ai.score += 1
+                print(f"Player 1 score is {self.human.score}, and CPU score is {self.ai.score}.")
+                if self.human_two.score == 2:
+                    self.display_winner
+            else:
+                print('Please pick from 1-5.')
             
 
     def display_winner(self):
         if self.human.score == 2:
             print("Player 1 is the Winner!")
+            self.ask_to_play_again()
         elif self.human_two.score == 2:
             print("Player 2 is the Winner!")
+            self.ask_to_play_again()
         elif self.ai.score == 2:
             print("CPU is the Winner!")
+            self.ask_to_play_again()
         else:
-            final_quesiton = input("Do you want to play again? y/n: ")
-            if final_quesiton == "y":
-                self.game_play()
-            elif final_quesiton == "n":
-                print("Thank you for playing.")
-                pass
-            else:
-                print("Please choose a correct response.")
+            print("Select correct response.")
 
 
+    def ask_to_play_again(self):
+        
+        final_quesiton = input("Do you want to play again? y/n: ")
+        if final_quesiton == "y":
+            self.choose_opp()
+        elif final_quesiton == "n":
+            print("Thank you for playing.")
+            break
+        else:
+            print("Please choose a correct response.")
 
 
 
