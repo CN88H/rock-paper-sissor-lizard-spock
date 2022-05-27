@@ -1,9 +1,9 @@
 
 
-class Rules:
-    def __init__(self) -> None:
-        self.gestures = ["rock", "paper", "sissor", "lizard", "spock"]
-        self.game_factor()
+# class Rules:
+#     def __init__(self) -> None:
+#         self.gestures = ["rock", "paper", "sissor", "lizard", "spock"]
+#         self.game_factor()
 
 # #     # def option(self):
 # #     #     gestures_1 = "Rock"

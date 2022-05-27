@@ -1,5 +1,5 @@
 from player import Player
-from rules import Rules
+# from rules import Rules
 
 class Human(Player):
     def __init__(self, name) -> None:
