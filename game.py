@@ -34,7 +34,7 @@ class Play_game:
             self.human_vs_ai()
         elif choice_opp == 2:
             print("You are facing another Player.")
-            choice_opp = [self.human, self.human_two]
+            # choice_opp = [self.human, self.human_two]
             self.human_vs_human()
         else:
             "Please reselect."
@@ -57,6 +57,7 @@ class Play_game:
         # ai_lists = ['Rock', 'Paper', 'Sissor', 'Lizard', 'Spock']
 
 
+
         while self.human.score <= 2 or self.ai.score <= 2:
             human_choice = gestures[int(input("Select your gesture: ")) - 1] 
             print(f"You've choosen {human_choice.name}")
@@ -64,14 +65,19 @@ class Play_game:
             ai_choice = gestures[random.randint(0, 4)]
             print(f"CPU Chose {ai_choice.name}")
 
+            
             if human_choice == ai_choice:
                 print("It's a tie! Try again.")
             elif ai_choice.name == human_choice.defeats_gesture2 or ai_choice.name == human_choice.defeats_gesture1:
                 print("You win this hand.")
                 self.human.score += 1
+                if self.human.score == 2:
+                    self.display_winner()
             elif human_choice.name == ai_choice.defeats_gesture1 or human_choice.name == ai_choice.defeats_gesture2:
                 print('You lost this hand.')
                 self.ai.score += 1
+                if self.ai.score == 2:
+                    self.display_winner()
             else:
                 print('Please pick from 1-5.')
             
@@ -92,20 +98,20 @@ class Play_game:
             Gesture('Lizard', 'Spock', 'Paper'),
             Gesture('Spock', 'Sissor', 'Rock')]
 
-        while self.human.score <= 2 or self.ai.score <= 2:
+        while self.human.score == 2 or self.human_two.score == 2:
                 human_choice = gestures[int(input("Select your gesture: ")) - 1] 
-                print(f"You've choosen {human_choice.name}")
+                print(f"Player 1 chose {human_choice.name}")
 
                 human_two_choice = gestures[int(input("Select your gesture: ")) - 1]
-                print(f"CPU Chose {human_two_choice.name}")
+                print(f"Player 2 Chose {human_two_choice.name}")
 
                 if human_choice == human_two_choice:
                     print("It's a tie! Try again.")
-                elif human_two_choice.name == human_choice.defeats_gesture2 and human_two_choice.name == human_choice.defeats_gesture1:
-                    print("You win this hand.")
+                elif human_two_choice.name == human_choice.defeats_gesture1 or human_two_choice.name == human_choice.defeats_gesture2:
+                    print("Player 1 wins this hand.")
                     self.human.score += 1
-                elif human_choice.name == human_two_choice.defeats_gesture1 and human_choice.name == human_two_choice.defeats_gesture2:
-                    print('You lost this hand.')
+                elif human_choice.name == human_two_choice.defeats_gesture1 or human_choice.name == human_two_choice.defeats_gesture2:
+                    print('Player 2 wins this hand.')
                     self.ai.score += 1
                 else:
                     print('Please pick from 1-5.')
