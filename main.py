@@ -13,3 +13,5 @@ from game import Play_game
 
 play_game = Play_game()
 
+play_game.game_play()
+
