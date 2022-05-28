@@ -121,19 +121,19 @@ class Play_game:
             if human_choice == human_two_choice:
                 print("It's a tie! Try again.")
                 print("")
-                print(f"Player 1 score is {self.human.score}, and CPU score is {self.human_two.score}.")
+                print(f"Player 1 score is {self.human.score}, and Player 2 score is {self.human_two.score}.")
             elif human_two_choice.name == human_choice.defeats_gesture1 or human_two_choice.name == human_choice.defeats_gesture2:
                 print("Player 1 wins this hand.")
                 print("")
                 self.human.score += 1
-                print(f"Player 1 score is {self.human.score}, and CPU score is {self.ai.score}.")
+                print(f"Player 1 score is {self.human.score}, and Player 2 score is {self.human_two.score}.")
                 if self.human.score == 2:
                     self.display_winner()
             elif human_choice.name == human_two_choice.defeats_gesture1 or human_choice.name == human_two_choice.defeats_gesture2:
                 print('Player 2 wins this hand.')
                 print("")
-                self.ai.score += 1
-                print(f"Player 1 score is {self.human.score}, and CPU score is {self.ai.score}.")
+                self.human_two.score += 1
+                print(f"Player 1 score is {self.human.score}, and Player 2 score is {self.human_two.score}.")
                 if self.human_two.score == 2:
                     self.display_winner
             else:
@@ -156,14 +156,19 @@ class Play_game:
 
     def ask_to_play_again(self):
         
-        final_quesiton = input("Do you want to play again? y/n: ")
-        if final_quesiton == "y":
-            self.choose_opp()
-        elif final_quesiton == "n":
-            print("Thank you for playing.")
-            break
-        else:
-            print("Please choose a correct response.")
+        ending_question = True
+        while ending_question == True:
+
+            final_quesiton = input("Do you want to play again? y/n: ")
+            if final_quesiton == "y":
+                self.choose_opp()
+            elif final_quesiton == "n":
+                print("Thank you for playing.")
+                ending_question = False
+                break
+                
+            else:
+                print("Please choose a correct response.")
 
 
 
