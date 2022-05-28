@@ -6,8 +6,8 @@ import random
 
 class Play_game:
     def __init__(self) -> None:
-        self.human = Human("player 1")
-        self.human_two = Human("player 2")
+        self.human = Human("player one")
+        self.human_two = Human("player two")
         self.ai = AI("CPU")
 
         # self.player = Human()
@@ -15,7 +15,7 @@ class Play_game:
     def game_play(self):
         self.display_welcome()
         self.choose_opp()
-        self.display_winner()
+        # self.display_winner()
 
 
 
@@ -30,12 +30,14 @@ class Play_game:
 
         if choice_opp == 1:
             print("You are facing an Cpu.")
-            # choice_opp = [self.human, self.ai]
+            choice_opp = [{self.human}, {self.ai}]
             self.human_vs_ai()
+
         elif choice_opp == 2:
             print("You are facing another Player.")
-            # choice_opp = [self.human, self.human_two]
+            choice_opp = [{self.human}, {self.human_two}]
             self.human_vs_human()
+
         else:
             "Please reselect."
 
@@ -73,19 +75,19 @@ class Play_game:
             if human_choice == ai_choice:
                 print("It's a tie! Try again.")
                 print("")
-                print(f"Player 1 score is {self.human.score}, and CPU score is {self.ai.score}.")
+                print(f"{self.human.name} score is {self.human.score}, and {self.ai.name} score is {self.ai.score}.")
             elif ai_choice.name == human_choice.defeats_gesture2 or ai_choice.name == human_choice.defeats_gesture1:
-                print("You win this hand.")
+                print(f"{self.human.name} won this hand.")
                 print("")
                 self.human.score += 1
-                print(f"Player 1 score is {self.human.score}, and CPU score is {self.ai.score}.")
+                print(f"{self.human.name} score is {self.human.score}, and {self.ai.name} score is {self.ai.score}.")
                 if self.human.score == 2:
                     self.display_winner()
             elif human_choice.name == ai_choice.defeats_gesture1 or human_choice.name == ai_choice.defeats_gesture2:
-                print('You lost this hand.')
+                print(f'{self.ai.name} won this hand.')
                 print("")
                 self.ai.score += 1
-                print(f"Player 1 score is {self.human.score}, and CPU score is {self.ai.score}.")
+                print(f"{self.human.name} score is {self.human.score}, and CPU score is {self.ai.score}.")
                 if self.ai.score == 2:
                     self.display_winner()
             else:
@@ -102,7 +104,7 @@ class Play_game:
             Gesture('Lizard', 'Spock', 'Paper'),
             Gesture('Spock', 'Sissor', 'Rock')]
 
-        while self.human.score == 2 or self.human_two.score == 2:
+        while self.human.score <= 2 or self.human_two.score <= 2:
             print("")
             print("This is the choices.")
             print("1 = rock")
@@ -113,27 +115,27 @@ class Play_game:
             print("")
 
             human_choice = gestures[int(input("Select your gesture: ")) - 1] 
-            print(f"Player 1 chose {human_choice.name}")
+            print(f"{self.human.name} chose {human_choice.name}")
 
             human_two_choice = gestures[int(input("Select your gesture: ")) - 1]
-            print(f"Player 2 Chose {human_two_choice.name}")
+            print(f"{self.human_two.name} Chose {human_two_choice.name}")
 
             if human_choice == human_two_choice:
                 print("It's a tie! Try again.")
                 print("")
-                print(f"Player 1 score is {self.human.score}, and Player 2 score is {self.human_two.score}.")
+                print(f"{self.human.name} score is {self.human.score}, and {self.human_two.name} score is {self.human_two.score}.")
             elif human_two_choice.name == human_choice.defeats_gesture1 or human_two_choice.name == human_choice.defeats_gesture2:
-                print("Player 1 wins this hand.")
+                print(f"{self.human.name} wins this hand.")
                 print("")
                 self.human.score += 1
-                print(f"Player 1 score is {self.human.score}, and Player 2 score is {self.human_two.score}.")
+                print(f"{self.human.name} score is {self.human.score}, and {self.human_two.name} score is {self.human_two.score}.")
                 if self.human.score == 2:
                     self.display_winner()
             elif human_choice.name == human_two_choice.defeats_gesture1 or human_choice.name == human_two_choice.defeats_gesture2:
-                print('Player 2 wins this hand.')
+                print(f'{self.human_two.name} wins this hand.')
                 print("")
                 self.human_two.score += 1
-                print(f"Player 1 score is {self.human.score}, and Player 2 score is {self.human_two.score}.")
+                print(f"{self.human.name} score is {self.human.score}, and {self.human_two.name} score is {self.human_two.score}.")
                 if self.human_two.score == 2:
                     self.display_winner
             else:
@@ -142,13 +144,13 @@ class Play_game:
 
     def display_winner(self):
         if self.human.score == 2:
-            print("Player 1 is the Winner!")
+            print(f"{self.human.name} is the Winner!")
             self.ask_to_play_again()
         elif self.human_two.score == 2:
-            print("Player 2 is the Winner!")
+            print(f"{self.human_two.name} is the Winner!")
             self.ask_to_play_again()
         elif self.ai.score == 2:
-            print("CPU is the Winner!")
+            print(f"{self.ai.name} is the Winner!")
             self.ask_to_play_again()
         else:
             print("Select correct response.")
@@ -161,7 +163,7 @@ class Play_game:
 
             final_quesiton = input("Do you want to play again? y/n: ")
             if final_quesiton == "y":
-                self.choose_opp()
+                self.game_play()
             elif final_quesiton == "n":
                 print("Thank you for playing.")
                 ending_question = False
@@ -169,11 +171,4 @@ class Play_game:
                 
             else:
                 print("Please choose a correct response.")
-
-
-
-
-
-
-
-
+                break
