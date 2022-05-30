@@ -15,7 +15,7 @@ class Play_game:
     def game_play(self):
         self.display_welcome()
         self.choose_opp()
-        # self.display_winner()
+        self.display_winner()
 
 
 
@@ -163,12 +163,15 @@ class Play_game:
 
             final_quesiton = input("Do you want to play again? y/n: ")
             if final_quesiton == "y":
+                self.human.score = 0
+                self.human_two.score = 0
+                self.ai.score = 0
                 self.game_play()
             elif final_quesiton == "n":
                 print("Thank you for playing.")
                 ending_question = False
-                break
+                exit()
                 
             else:
                 print("Please choose a correct response.")
-                break
+                
